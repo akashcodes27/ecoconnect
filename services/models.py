@@ -9,7 +9,7 @@ class ServiceProvider(models.Model):
         ('compost', 'Compost Pickup'),
         ('rainwater', 'Rainwater Harvesting'),
     ]
-
+     
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     service_type = models.CharField(max_length=50, choices=SERVICE_TYPES)
