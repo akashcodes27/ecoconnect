@@ -1,0 +1,49 @@
+{% extends 'services/base.html' %}
+
+{% block content %}
+<h2>Find Green Service Providers</h2>
+
+<form method="get" class="row g-3 mb-4">
+    <div class="col-auto">
+        <select name="q" class="form-select">
+            <option value="">-- Filter by Service Type --</option>
+            <option value="solar">Solar Installation</option>
+            <option value="insulation">Home Insulation</option>
+            <option value="compost">Compost Pickup</option>
+            <option value="rainwater">Rainwater Harvesting</option>
+        </select>
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-success">Search</button>
+    </div>
+</form>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Provider Name</th>
+            <th>Service Type</th>
+            <th>Location</th>
+            <th>Certification</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for provider in providers %}
+        <tr>
+            <td>{{ provider.name }}</td>
+            <td>{{ provider.get_service_type_display }}</td>
+            <td>{{ provider.location }}</td>
+            <td>
+                {% if provider.certification %}
+                    <a href="{{ provider.certification.url }}" target="_blank">View Cert</a>
+                {% else %}
+                    Not Uploaded
+                {% endif %}
+            </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="4">No providers found.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
