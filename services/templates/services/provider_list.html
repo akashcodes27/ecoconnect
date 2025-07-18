@@ -1,10 +1,10 @@
 {% extends 'services/base.html' %}
 
 {% block content %}
-<h2>Find Green Service Providers</h2>
+<h2 class="mb-4">Find Green Service Providers</h2>
 
-<form method="get" class="row g-3 mb-4">
-    <div class="col-auto">
+<form method="get" class="row g-3 mb-5">
+    <div class="col-md-4">
         <select name="q" class="form-select">
             <option value="">-- Filter by Service Type --</option>
             <option value="solar">Solar Installation</option>
@@ -18,32 +18,32 @@
     </div>
 </form>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Provider Name</th>
-            <th>Service Type</th>
-            <th>Location</th>
-            <th>Certification</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for provider in providers %}
-        <tr>
-            <td>{{ provider.name }}</td>
-            <td>{{ provider.get_service_type_display }}</td>
-            <td>{{ provider.location }}</td>
-            <td>
-                {% if provider.certification %}
-                    <a href="{{ provider.certification.url }}" target="_blank">View Cert</a>
-                {% else %}
-                    Not Uploaded
-                {% endif %}
-            </td>
-        </tr>
-        {% empty %}
-        <tr><td colspan="4">No providers found.</td></tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div class="row">
+    {% for provider in providers %}
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title">{{ provider.name }}</h5>
+                    <p class="card-text">
+                        <strong>Service:</strong> {{ provider.get_service_type_display }}<br>
+                        <strong>Location:</strong> {{ provider.location }}<br>
+                        <strong>Certification:</strong>
+                        {% if provider.certification %}
+                            <a href="{{ provider.certification.url }}" target="_blank">View</a>
+                        {% else %}
+                            Not uploaded
+                        {% endif %}
+                    </p>
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'book_service' %}" class="btn btn-outline-primary btn-sm">Book Now</a>
+                    {% else %}
+                        <a href="{% url 'login' %}" class="btn btn-outline-secondary btn-sm">Login to Book</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <p>No providers found.</p>
+    {% endfor %}
+</div>
 {% endblock %}

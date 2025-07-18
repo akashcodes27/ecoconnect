@@ -1,0 +1,27 @@
+{% extends 'services/base.html' %}
+
+{% block content %}
+<h2>Welcome, {{ user.username }}</h2>
+
+<a href="{% url 'create_provider' %}" class="btn btn-success mb-3">+ Add New Service</a>
+
+{% if providers %}
+  {% for provider in providers %}
+    <div class="card mt-3">
+      <div class="card-body">
+        <!-- <h5 class="card-title">{{ provider.name }}</h5> -->
+        <p class="card-text"><strong>Service Type:</strong> {{ provider.service_type }}</p>
+        <p class="card-text"><strong>Location:</strong> {{ provider.location }}</p>
+        {% if provider.certification %}
+          <p><strong>Certification:</strong> <a href="{{ provider.certification.url }}">Download</a></p>
+        {% else %}
+          <p><em>No certification uploaded.</em></p>
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %}
+{% else %}
+  <p>You haven't listed any services yet.</p>
+{% endif %}
+
+{% endblock %}

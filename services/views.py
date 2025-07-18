@@ -1,13 +1,16 @@
 # services/views.py
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth import login, authenticate
 from django.views.generic import ListView, TemplateView
 from django.utils import timezone
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .models import ServiceProvider, Booking
-from .forms import BookingForm, ProviderRegistrationForm, UploadCertificationForm, UserRegisterForm
+from .forms import BookingForm, ProviderRegistrationForm, UserRegisterForm
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404
+
 
 # --- Home Page with Visit Tracker --- 
 class HomeView(TemplateView):
@@ -44,28 +47,11 @@ def book_service(request):
             return redirect('user_history')
     else:
         form = BookingForm()
+
     return render(request, 'services/book_service.html', {'form': form})
 
 
-
-@login_required
-def upload_certification(request):
-    if request.method == 'POST':
-        form = UploadCertificationForm(request.POST, request.FILES)
-        if form.is_valid():
-            # Assumes ServiceProvider already exists for this user
-            provider = ServiceProvider.objects.get(user=request.user)
-            provider.certification = form.cleaned_data['certification']
-            provider.save()
-            return redirect('home')
-    else:
-        form = UploadCertificationForm()
-    return render(request, 'services/upload_cert.html', {'form': form})
-
-
-
-
-
+# --- View User Booking History ---
 @login_required
 def user_history(request):
     bookings = Booking.objects.filter(customer=request.user)
@@ -73,7 +59,7 @@ def user_history(request):
     return render(request, 'services/user_history.html', {'bookings': bookings, 'visits': visits})
 
 
-
+# --- Register New User ---
 def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
@@ -85,3 +71,45 @@ def register(request):
         form = UserRegisterForm()
     return render(request, 'services/register.html', {'form': form})
 
+
+# --- Login View (handles next redirect) ---
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user:
+            login(request, user)
+            return redirect(request.POST.get('next') or 'home')
+    return render(request, 'services/login.html')
+
+
+# --- Create a Provider Profile ---
+@login_required
+def create_provider(request):
+    # if ServiceProvider.objects.filter(user=request.user).exists():
+    #     return redirect('home')
+
+    if request.method == 'POST':
+        form = ProviderRegistrationForm(request.POST, request.FILES)
+        if form.is_valid():
+            provider = form.save(commit=False)
+            provider.user = request.user
+            provider.save()
+            return redirect('providers')
+    else:
+        form = ProviderRegistrationForm()
+
+    return render(request, 'services/create_provider.html', {'form': form})
+
+
+
+
+
+@login_required
+def provider_dashboard(request):
+    providers = ServiceProvider.objects.filter(user=request.user)
+    return render(request, 'services/provider_dashboard.html', {'providers': providers})
+
+def about_page(request):
+    return render(request, 'services/about.html')

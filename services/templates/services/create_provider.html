@@ -1,0 +1,10 @@
+{% extends 'services/base.html' %}
+
+{% block content %}
+<h2>Create Your Green Provider Profile</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Submit Profile</button>
+</form>
+{% endblock %}
