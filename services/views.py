@@ -45,3 +45,43 @@ def book_service(request):
     else:
         form = BookingForm()
     return render(request, 'services/book_service.html', {'form': form})
+
+
+
+@login_required
+def upload_certification(request):
+    if request.method == 'POST':
+        form = UploadCertificationForm(request.POST, request.FILES)
+        if form.is_valid():
+            # Assumes ServiceProvider already exists for this user
+            provider = ServiceProvider.objects.get(user=request.user)
+            provider.certification = form.cleaned_data['certification']
+            provider.save()
+            return redirect('home')
+    else:
+        form = UploadCertificationForm()
+    return render(request, 'services/upload_cert.html', {'form': form})
+
+
+
+
+
+@login_required
+def user_history(request):
+    bookings = Booking.objects.filter(customer=request.user)
+    visits = request.session.get('visits', 0)
+    return render(request, 'services/user_history.html', {'bookings': bookings, 'visits': visits})
+
+
+
+def register(request):
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('home')
+    else:
+        form = UserRegisterForm()
+    return render(request, 'services/register.html', {'form': form})
+
