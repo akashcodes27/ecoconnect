@@ -9,7 +9,7 @@ from django.urls import reverse
 from .models import ServiceProvider, Booking
 from .forms import BookingForm, ProviderRegistrationForm, UploadCertificationForm, UserRegisterForm
 
-# --- Home Page with Visit Tracker ---
+# --- Home Page with Visit Tracker --- 
 class HomeView(TemplateView):
     template_name = 'services/home.html'
 
