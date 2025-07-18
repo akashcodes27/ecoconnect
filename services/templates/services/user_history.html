@@ -1,0 +1,32 @@
+{% extends 'services/base.html' %}
+
+{% block content %}
+<h2>Your Booking History</h2>
+
+<p>You’ve visited this site <strong>{{ visits }}</strong> time{{ visits|pluralize }}.</p>
+
+{% if bookings %}
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Provider</th>
+                <th>Service Type</th>
+                <th>Location</th>
+                <th>Booking Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for booking in bookings %}
+            <tr>
+                <td>{{ booking.provider.name }}</td>
+                <td>{{ booking.provider.get_service_type_display }}</td>
+                <td>{{ booking.provider.location }}</td>
+                <td>{{ booking.booking_date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p class="text-muted">You haven't made any bookings yet.</p>
+{% endif %}
+{% endblock %}
