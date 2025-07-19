@@ -46,42 +46,43 @@
 
 <!-- images and text -->
 
-<div class="container my-5">
+<div class="custom-container">
 
   <!-- Section 1: Image Left, Text Right -->
-  <div class="row align-items-center mb-5 custom-imgtext">
-    <div class="col-md-6">
-      <img src="{% static '../media/images/solar_panel.jpg' %}" alt="Solar" class="img-fluid rounded">
+  <div class="imgtext-row">
+    <div class="imgtext-col imgtext-left">
+      <img src="{% static 'media/images/solar_panel.jpg' %}" alt="Solar" class="img-fluid-custom">
     </div>
-    <div class="col-md-6 text-light">
+    <div class="imgtext-col imgtext-right">
       <h3>Power Your Home with the Sun</h3>
       <p>Switch to clean energy with certified solar panel installers in your area.</p>
     </div>
   </div>
 
   <!-- Section 2: Text Left, Image Right -->
-  <div class="row align-items-center flex-md-row-reverse mb-5 custom-imgtext">
-    <div class="col-md-6">
-      <img src="{% static '../media/images/compost.jpg' %}" alt="Compost" class="img-fluid rounded">
+  <div class="imgtext-row reverse">
+    <div class="imgtext-col imgtext-left">
+      <img src="{% static 'media/images/compost.jpg' %}" alt="Compost" class="img-fluid-custom">
     </div>
-    <div class="col-md-6 text-light">
+    <div class="imgtext-col imgtext-right">
       <h3>Compost, the Smart Way</h3>
       <p>Schedule regular compost pickup and turn your waste into environmental gold.</p>
     </div>
   </div>
 
   <!-- Section 3: Image Left, Text Right -->
-  <div class="row align-items-center mb-5 custom-imgtext">
-    <div class="col-md-6">
-      <img src="{% static '../media/images/insulation.jpg' %}" alt="Insulation" class="img-fluid rounded">
+  <div class="imgtext-row">
+    <div class="imgtext-col imgtext-left">
+      <img src="{% static 'media/images/insulation.jpg' %}" alt="Insulation" class="img-fluid-custom">
     </div>
-    <div class="col-md-6 text-light">
+    <div class="imgtext-col imgtext-right">
       <h3>Keep Your Home Cozy</h3>
       <p>Get expert insulation services to reduce energy bills and stay warm all year.</p>
     </div>
   </div>
 
 </div>
+
 
 
 
