@@ -20,6 +20,18 @@
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
 /* === General Body === */
 body {
     background: linear-gradient(135deg, #0f2918 0%, #16432a 30%, #1a4d2e 70%, #22543d 100%);
@@ -336,6 +348,7 @@ h1 {
 h2 {
     font-size: 2rem;
     margin-bottom: 1.5rem;
+    margin-top: 35px;
 }
 
 /* === Text Elements === */
