@@ -12,7 +12,7 @@ urlpatterns = [
     # services/urls.py
     path('provider-dashboard/', views.provider_dashboard, name='provider_dashboard'),
     path('about/', views.about_page, name='about'),
-
+    path('contact/', views.contact_page, name='contact'),
 
 
 ]

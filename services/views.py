@@ -113,3 +113,6 @@ def provider_dashboard(request):
 
 def about_page(request):
     return render(request, 'services/about.html')
+
+def contact_page(request):
+    return render(request, 'services/contact.html')
