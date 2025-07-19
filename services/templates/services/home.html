@@ -1,9 +1,41 @@
 {% extends 'services/base.html' %}
 
 {% block content %}
-    <div class="text-center">
-        <h1>Welcome to EcoConnect 🌱</h1>
-        <p>Connecting you with trusted green service providers in your area.</p>
-        <p><strong>You’ve visited us {{ visits }} time{{ visits|pluralize }}!</strong></p>
+<div class="py-5 px-3 text-center">
+  <h1 class="display-5 fw-bold text-success">Welcome to EcoConnect 🌱</h1>
+  <p class="lead">Your trusted platform for sustainable local services.</p>
+</div>
+
+<div class="row mt-4">
+  <div class="col-md-4">
+    <div class="card shadow-sm mb-4" style="background-color: #90c0aa; border: none;">
+      <div class="card-body text-center">
+        <h5 class="card-title" style="color: #14532d;">☀️ Solar Installation</h5>
+        <p class="card-text" style="color: #2c3e50;">Harness clean energy and reduce your carbon footprint with local solar experts.</p>
+      </div>
     </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card shadow-sm mb-4" style="background-color: #90c0aa; border: none;">
+      <div class="card-body text-center">
+        <h5 class="card-title" style="color: #14532d;">♻️ Compost Pickup</h5>
+        <p class="card-text" style="color: #2c3e50;">Keep waste out of landfills with convenient and eco-friendly composting services.</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card shadow-sm mb-4" style="background-color: #90c0aa; border: none;">
+      <div class="card-body text-center">
+        <h5 class="card-title" style="color: #14532d;">💧 Rainwater Harvesting</h5>
+        <p class="card-text" style="color: #2c3e50;">Save water and cut utility costs by collecting and reusing rainwater responsibly.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="text-center mt-4 mb-5">
+  <a href="{% url 'providers' %}" class="btn btn-lg" style="background-color: #27ae60; color: white;">
+    Explore Providers
+  </a>
+</div>
 {% endblock %}
