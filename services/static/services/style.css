@@ -535,3 +535,77 @@ p, .lead {
         font-size: 1.5rem;
     }
 }
+
+
+
+
+
+
+/* Designs for contact page */
+.contact-container {
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 40px;
+    background: rgb(5 42 19 / 90%);
+    border-radius: 20px;
+    /* box-shadow: var(--shadow-medium); */
+    color: var(--text-light);
+}
+
+.contact-container h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-align: center;
+    color: var(--light-accent);
+}
+
+.contact-container .intro {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 1.1rem;
+    color: var(--text-medium);
+}
+
+.contact-container form .form-group {
+    margin-bottom: 20px;
+}
+
+.contact-container label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+
+.contact-container input,
+.contact-container textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    background-color: rgba(22, 67, 42, 0.8);
+    color: var(--text-light);
+    border: 1px solid rgba(61, 213, 109, 0.3);
+    font-size: 0.95rem;
+}
+
+.contact-container input:focus,
+.contact-container textarea:focus {
+    outline: none;
+    border-color: var(--primary-green);
+    box-shadow: 0 0 5px rgba(46, 204, 113, 0.3);
+}
+
+.contact-container .contact-info {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.contact-container .contact-info h4 {
+    color: var(--text-light);
+    margin-bottom: 10px;
+}
+
+.contact-container .contact-info p {
+    margin: 4px 0;
+    color: var(--text-medium);
+}
